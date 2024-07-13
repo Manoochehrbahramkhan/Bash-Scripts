@@ -1,0 +1,28 @@
+#!/bin/bash
+#Run As Root!
+red_notic() {
+        tput setaf 1
+        echo "$1"
+        tput sgr0
+}
+HDD=`df -Th | awk '$7 == "/" && $5 == "9.8G" {gsub("G","",$5); print $5}'`
+echo $HDD
+sleep 0.5
+ts=15
+if [[ $HDD < $ts ]];then
+        red_notic 'your space is low'
+        read -p "need incrace do you want?(y/n)" ans
+        if [ $ans == y ]; then
+        inc=`vgs | awk '{print $7}' | grep g`
+                echo $inc
+                sleep 3
+                lvresize -L +$inc /dev/ubuntu-vg/ubuntu-lv
+                resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+        elif [ $ans == n ]; then
+                echo "Ok,but watch out"
+        else
+                echo "Please be correct!"
+        fi
+else
+        echo "this space is good!"
+fi
