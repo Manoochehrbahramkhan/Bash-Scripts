@@ -11,7 +11,7 @@ sleep 0.5
 ts=15
 if [[ $HDD < $ts ]];then
         red_notic 'your space is low'
-        read -p "need incrace do you want?(y/n)" ans
+        read -p "do you want increase your Disk?(y/n)" ans
         if [ $ans == y ]; then
         inc=`vgs | awk '{print $7}' | grep g`
                 echo $inc
