@@ -1,0 +1,25 @@
+#!/bin/bash
+bbb-record --list > data.txt
+input_file="data.txt"
+read -r header < "$input_file"
+#echo "Internal MeetingID                                           External MeetingID             Published"
+while IFS= read -r line; do
+    columns=($line)
+
+    internal_meeting_id="${columns[0]}"
+    external_meeting_id="${columns[-1]}"
+    published="${columns[-2]}"
+    if [[ $external_meeting_id == *"srv"* ]]; then     #srv is template fill this argum with your pattern in external meeting ID
+        if [[ -n $published ]]; then
+            echo "$internal_meeting_id       $external_meeting_id            $published"
+        fi
+    else
+        if [[ -z $published ]]; then
+            echo "$internal_meeting_id       $external_meeting_id"
+        fi
+    fi
+done < <(tail -n +2 "$input_file") | grep -v "./check*"  > new.txt
+not_record=`cat new.txt | awk '{if($3!="presentation") print $1}' | wc -l`
+record=`cat new.txt | awk '{if($3=="presentation") print $1}' | wc -l`
+echo " this number of not recording videos :$not_record"
+echo " this number of recording videos :$record"
