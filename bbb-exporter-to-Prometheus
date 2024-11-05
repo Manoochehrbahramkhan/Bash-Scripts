@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ $UID != 0 ]];then
+        echo "you dont have privilage!"
+else
+        hostname=`hostname`
+        secret=`bbb-conf --secret | grep Secret | cut -d":" -f2 | grep -v //`
+
+        docker run -itd --name BBB-exporter1 -e BBB_API_URL="https://${hostname}.<your-domain-name>/bigbluebutton/api/" -e BBB_API_SECRET="${secret}" -e API_BASE_URL="https://${hostname}.<your-domain-name>/bigbluebutton/api/" -e API_SECRET="${secret}" -p 9688:9688 --restart always greenstatic/bigbluebutton-exporter
+
+        if [[ $? -eq 0 ]];then
+                print "image successfully created!"
+        else
+                break
+        fi
+        wait
+
+        ufw allow 9688/tcp
+
+fi
