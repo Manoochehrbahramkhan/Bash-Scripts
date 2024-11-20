@@ -4,6 +4,9 @@ reset="\033[0m"
 sudo apt install bbb-webhooks -y
 if [[ $? -eq 0 ]];then
         echo -e "${green} webhooks install! ${reset}"
+else
+        echo -e "${green} not install! ${reset}"
+fi
 #pannel farsi
 
 cd /root/greenlight
