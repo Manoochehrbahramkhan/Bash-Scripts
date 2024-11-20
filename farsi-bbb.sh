@@ -1,7 +1,11 @@
 #!/bin/bash
 green="\033[32m"
 reset="\033[0m"
+sudo apt install bbb-webhooks -y
+if [[ $? -eq 0 ]];then
+        echo -e "${green} webhooks install! ${reset}"
 #pannel farsi
+
 cd /root/greenlight
 docker-compose down
 
