@@ -6,6 +6,6 @@ logit () {
     if [ $LOG_LEVEL = 'ERORR' ] || $VERBOSE
     then
         echo "${TIMESTAMP} ${HOST}
-        ${ PROGRAM_NAME } [ ${PID} ] : ${LOG_LEVEL} $      {MSG}"
+        ${ PROGRAM_NAME } [ ${PID} ] : ${LOG_LEVEL} ${MSG}"
     fi
 }
