@@ -1,5 +1,11 @@
 #!/bin/bash
 #Run As Root!
+
+#hot_plugin extend 
+
+echo "- - -" > /sys/class/scsi_host/host0/scan
+echo 1 > /sys/block/sda/device/rescan
+
 red_notic() {
         tput setaf 1
         echo "$1"
