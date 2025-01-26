@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt install xmlstarlet -y
 
 API_URL="https://your-bbb-server.com/bigbluebutton/api/"
 SECRET="your_shared_secret"
