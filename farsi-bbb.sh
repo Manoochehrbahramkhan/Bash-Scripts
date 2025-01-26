@@ -26,6 +26,8 @@ wait
 cp /home/iauec/default.pdf /var/www/bigbluebutton-default/assets
 sleep 2
 echo "recordFullDurationMedia=true" | tee -a /etc/bigbluebutton/bbb-web.properties
+cp /home/iauec/certbundle.pem /etc/haproxy/
+systemcl restart haproxy
 
 if [[ $? == 0 ]];then
         echo -e "${green} your system will be reboot in 3s ${reset}"
