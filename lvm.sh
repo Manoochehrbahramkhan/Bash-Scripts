@@ -1,5 +1,9 @@
 #!/bin/bash
-
+echo 1 > /sys/block/sda/device/rescan
+echo "- - -" > /sys/class/scsi_host/host0/scan
+#or
+# for host in /sys/class/scsi_host/host*/scan; do     echo "- - -" > "$host"; done
+#
 # Variables
 DISK="/dev/sdb"
 PARTITION="${DISK}1"
